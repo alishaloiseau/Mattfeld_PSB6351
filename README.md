@@ -9,3 +9,25 @@ Here you can find, work on, and submit materials for the class!
 1) GitHub Account
 2) Laptop
 
+# Setting up your environment
+
+The first command loads a miniconda software for creating conda virtual environment
+1) module load miniconda3-4.5.11-oqs2mbgv3mmo3dll2f2rbxt4plfgyqzv
+The second command creates your conda environment with a specific version of python
+2) conda create -p /home/##ADUSERNAME##/YOURLASTNAME_PSB6351/.envs/psb6351_environment python=3.9
+The next command activates your conda environment
+3) conda activate /home/amattfel/YOURLASTNAME_PSB6351/.envs/psb6351_environment
+The next two commands install the packages you'll need to work with data
+4) conda install nipype
+5) conda install pandas
+
+# Now setup your bash environment
+
+First add the following lines to your .bashrc file
+
+prompt1="\[\e[0;33m\][\A]\[\e[0m\]" # Display the time in the bash prompt
+prompt2="\[\e[1;39m\]\u@\h:\W\$\[\e[0m\]" # Add username@host:dir$
+promptinfo=`${HOME}/.nodeload`
+PROMPT_COMMAND='PS1="\[\e[1;37m\e[44m\]${project_name}\[\e[0;0m\]${prompt1}${promptinfo}${prompt2}"'
+
+source /home/YOURADUSERNAME/YOURLASTNAME_PSB6351/code/.psb6351_env
