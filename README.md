@@ -21,7 +21,7 @@ Here you can find, work on, and submit materials for the class!
 
 ### The next command activates your conda environment
 
-3) conda activate /home/amattfel/YOURLASTNAME_PSB6351/.envs/psb6351_environment
+3) conda activate /home/YOURADUSERNAME/YOURLASTNAME_PSB6351/.envs/psb6351_environment
 
 ### The next two commands install the packages you'll need to work with data
 
