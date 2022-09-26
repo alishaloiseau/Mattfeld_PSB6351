@@ -19,11 +19,11 @@ def infotodict(seqinfo):
     bids_subject_session_prefix: BIDS subject/session prefix
     """
 
-    t1w = create_key('')
-    dwi = create_key('')
+    t1w = create_key('sub-{subject}/anat/sub-{subject}_run-{item}_T1w')
+    dwi = create_key('sub-{subject}/dwi/sub-{subject}_run-{item}_dwi')
     loc1_task = create_key('')
     loc2_task = create_key('')
-    study1_task = create_key('')
+    study1_task = create_key('sub-{subject}/func/sub-{subject}_task-study_run-1_bold')
     study2_task = create_key('')
     study3_task = create_key('')
     study4_task = create_key('')
@@ -43,13 +43,13 @@ def infotodict(seqinfo):
             info[t1w].append(s[2])
         elif (slice_num > 1) and (timepoints == ) and ("" in s[12]):
             info[dwi].append(s[2])
-        elif (timepoints == ) and ("" in s[12]):
+        elif (timepoints == ) and ("ROI_loc_1" in s[12]):
             info[loc1_task].append(s[2])
         elif (timepoints == ) and ("" in s[12]):
             info[loc2_task].append(s[2])
-        elif (timepoints == ) and ('' in s[12]):
+        elif (timepoints == 355) and ('' in s[12]):
             info[study1_task].append(s[2])
-        elif "" in s.series_description:
+        elif "dMRI_DistortionMap_AP" in s.series_description:
             info[dwi_fmap].append({"item": s[2], "dir": "AP"})
         elif "" in s.series_description:
             info[dwi_fmap].append({"item": s[2], "dir": "PA"})
