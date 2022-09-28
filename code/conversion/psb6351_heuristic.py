@@ -21,8 +21,8 @@ def infotodict(seqinfo):
 
     t1w = create_key('sub-{subject}/anat/sub-{subject}_run-{item}_T1w')
     dwi = create_key('sub-{subject}/dwi/sub-{subject}_run-{item}_dwi')
-    loc1_task = create_key('')
-    loc2_task = create_key('')
+    loc1_task = create_key('sub-{subject}/func/sub-{subject}_task-loc_run-{item}_bold')
+    loc2_task = create_key('sub-{subject}/func/sub-{subject}_task-loc_run-{item}_bold')
     study1_task = create_key('sub-{subject}/func/sub-{subject}_task-study_run-1_bold')
     study2_task = create_key('')
     study3_task = create_key('')
@@ -33,13 +33,15 @@ def infotodict(seqinfo):
     info = {t1w : [],
             dwi : [],
             loc1_task : [],
+            loc2_task : [],
             study1_task : [],
+            study2_task : [],
             task_fmap : [],
             dwi_fmap : []}
 
     for s in seqinfo:
         xdim, ydim, slice_num, timepoints = (s[6], s[7], s[8], s[9])
-        if (slice_num == ) and (timepoints == 1) and ("" in s.series_description):
+        if (slice_num == 176) and (timepoints == 1) and ("T1w" in s.series_description):
             info[t1w].append(s[2])
         elif (slice_num > 1) and (timepoints == ) and ("" in s[12]):
             info[dwi].append(s[2])
