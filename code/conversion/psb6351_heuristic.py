@@ -58,6 +58,14 @@ def infotodict(seqinfo):
             info[study1_task].append(s[2])
         elif (timepoints == 345) and ('fMRI_REVL_Study_4' in s.series_description):
             info[study1_task].append(s[2])
+        elif (timepoints == 355) and ('Study_1' in s[12]):
+            info[study1_task].append(s[2])
+        elif (timepoints == 355) and ('Study_2' in s[12]):
+            info[study2_task].append(s[2])
+        elif (timepoints == 355) and ('Study_3' in s[12]):
+            info[study3_task].append(s[2])
+        elif (timepoints == 355) and ('Study_4' in s[12]):
+            info[study4_task].append(s[2])
         elif "dMRI_DistortionMap_AP" in s.series_description:
             info[dwi_fmap].append({"item": s[2], "dir": "AP"})
         elif "dMRI_DistortionMap_PA" in s.series_description:
