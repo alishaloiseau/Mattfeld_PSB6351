@@ -41,3 +41,5 @@ promptinfo=`${HOME}/.nodeload`
 PROMPT_COMMAND='PS1="\[\e[1;37m\e[44m\]${project_name}\[\e[0;0m\]${prompt1}${promptinfo}${prompt2}"'
 
 source /home/YOURADUSERNAME/YOURLASTNAME_PSB6351/code/.psb6351_env
+
+# This stuff is super cool!!!
