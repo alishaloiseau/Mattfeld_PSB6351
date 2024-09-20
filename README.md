@@ -11,8 +11,8 @@ Here you can find, work on, and submit materials for the class!
 
 # Setting up your environment
 
-**!!! THIS IS ONLY FOR STUDENTS WHO DO NOT SET UP THEIR ACCOUNT THROUGH THEIR LAB !!!**
-**!!! STOP !!! DO NOT PROCEED IF YOU HAVE YOUR ENVIRONMENT SET UP !!!**
+# **!!! THIS IS ONLY FOR STUDENTS WHO DO NOT SET UP THEIR ACCOUNT THROUGH THEIR LAB !!!**
+# **!!! STOP !!! DO NOT PROCEED IF YOU HAVE YOUR ENVIRONMENT SET UP !!!**
 
 ### The first command loads a miniconda software for creating conda virtual environment
 
