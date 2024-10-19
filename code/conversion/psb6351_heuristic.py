@@ -31,35 +31,36 @@ def infotodict(seqinfo):
     # note you should probably have a key for each scan you want to capture
 
     t1w = create_key('sub-{subject}/{session}/anat/sub-{subject}_{session}_run-{item:02d}_T1w')
-
+    func_bold = create_key('sub-{subject}/{session}/func/sub-{subject}_{session}_task-{task}_run-{item:02d}_bold')
     dwi = create_key('sub-{subject}/{session}/dwi/sub-{subject}_{session}_run-{item:02d}_dwi')
+    fmap_func = create_key('sub-{subject}/{session}/fmap/sub-{subject}_{session}_acq-{acq}_dir-{dir}_run-{item:02d}_epi')
+    fmap_dwi = create_key('sub-{subject}/{session}/fmap/sub-{subject}_{session}_acq-{acq}_dir-{dir}_run-{item:02d}_epi')
 
-    fmap_func = create_key('sub-{subject}/{session}/fmap/sub-{subject}_{session}_acq-{acquisition}_dir-{direction}_epi') 
-
-    fmap_dwi = create_key('sub-{subject}/{session}/fmap/sub-{subject}_{session}_acq-{acquisition}_dir-{direction}_epi')
-
-    info = {
-            t1w: [], 
-            dwi: [], 
-            fmap_func: [],
-            fmap_dwi: [],
-           }
+    info = {t1w: [], func_bold: [], dwi: [], fmap_func: [], fmap_dwi: []}
 
     for s in seqinfo:
         xdim, ydim, slice_num, timepoints = (s[6], s[7], s[8], s[9])
 
-        if (slice_num == 176) and (timepoints == 1) and ("T1w_MPR_vNav" in s.series_description)
+        if (slice_num == 176) and (timepoints == 1) and ("T1w_MPR_vNav" in s.series_description):
             info[t1w].append(s[2])
-        elif (timepoints == 103) and (timepoints == 1) and ("dMRI_AP_REVL" in s[12]):
-            info[dwi].append(s[2])
-        
-        if (timepoints == 355) and (timepoints == 1) and (
-            "fMRI_REVL_Study_2" in s.series_description or
-            "fMRI_REVL_Study_3" in s.series_description
-            "fMRI_REVL_Study_4" in s.series_description
-            )
-            info[fmap_func].append(s[2], "direction", "acquistion")
-    
-        '''else:
-            pass'''
+
+        elif (timepoints == 103) and ("dMRI_AP_REVL" in s.protocol_name):
+            info[dwi].append({'item': s[2]})
+
+        elif (timepoints == 355) and ("fMRI_REVL_Study" in s.series_description):
+            task_num = s.series_description.split('_')[-1]
+            info[func_bold].append({'item': s[2], 'task': f'study{task_num}'})
+
+        elif "fMRI_REVL_ROI_loc" in s.series_description:
+            run_num = s.series_description.split('_')[-1]
+            info[func_bold].append({'item': s[2], 'task': f'loc{run_num}'})
+
+        elif "fMRI_DistortionMap" in s.series_description:
+            direction = "AP" if "AP" in s.series_description else "PA"
+            info[fmap_func].append({'item': s[2], 'acq': 'func', 'dir': direction})
+
+        elif "dMRI_DistortionMap" in s.series_description:
+            direction = "AP" if "AP" in s.series_description else "PA"
+            info[fmap_dwi].append({'item': s[2], 'acq': 'dwi', 'dir': direction})
+
     return info
